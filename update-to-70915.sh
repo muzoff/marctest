@@ -37,7 +37,7 @@ function update_node() {
   then
     echo -e "${RED}$COIN_NAME${NC} is already installed and running the lastest version."
     exit 0
-  elif [[ "$PROTOCOL_VERSION" -eq 70914 ]]
+  elif [[ "$PROTOCOL_VERSION" -le 70914 ]]
   then
     echo -e "You are not running the latest version, sit tight while the update is taking place."
     systemctl stop $COIN_NAME.service >/dev/null 2>&1

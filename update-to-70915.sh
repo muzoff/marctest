@@ -55,8 +55,7 @@ function update_node() {
 
 function configure_systemd() {
   systemctl daemon-reload
-  marcoind -resync
- # systemctl start $COIN_NAME.service >/dev/null 2>&1
+  systemctl start $COIN_NAME.service >/dev/null 2>&1
 
 }
 

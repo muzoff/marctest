@@ -55,7 +55,10 @@ function update_node() {
 
 function configure_systemd() {
   systemctl daemon-reload
-  systemctl start $COIN_NAME.service >/dev/null 2>&1
+  $COIN_DAEMON -resync >/dev/null 2>&1
+  sleep 30
+  $COIN_CLI getinfo
+  
 
 }
 
@@ -63,4 +66,3 @@ function configure_systemd() {
 clear
 
 update_node
-configure_systemd

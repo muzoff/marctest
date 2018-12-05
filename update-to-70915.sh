@@ -31,7 +31,7 @@ function update_node() {
   systemctl start $COIN_NAME.service 
   sleep 10
   apt -y install jq getinfo 2>/dev/null
-  PROTOCOL_VERSION=$($COIN_PATH$COIN_CLI | jq .protocolversion)
+  PROTOCOL_VERSION=$($COIN_PATH$COIN_CLI getinfo 2>/dev/null| jq .protocolversion)
   echo $
   if [[ "$PROTOCOL_VERSION" -eq 70915 ]]
   then
@@ -55,8 +55,7 @@ function update_node() {
 
 function configure_systemd() {
   systemctl daemon-reload
-  $COIN_DAEMON -resync 
-  sleep 30
+  systemctl start $COIN_NAME.service 
   $COIN_CLI getinfo
   
 

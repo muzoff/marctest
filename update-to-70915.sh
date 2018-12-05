@@ -20,7 +20,7 @@ function download_node() {
   tar -xvzf $COIN_ZIP >/dev/null 2>&1
   cp marcoin* $COIN_PATH
   chmod 755 /usr/local/bin/*
-  cd - >/dev/null 2>&1 >/dev/null 2>&1
+  cd - >/dev/null 2>&1
   rm -rf $TMP_FOLDER >/dev/null 2>&1
 }
 
@@ -30,14 +30,14 @@ function update_node() {
   sleep 3
   systemctl start $COIN_NAME.service >/dev/null 2>&1
   sleep 10
-  apt -y install jq getinfo 2>/dev/null
+  apt -y install jq >/dev/null 2>&1
   PROTOCOL_VERSION=$($COIN_PATH$COIN_CLI getinfo 2>/dev/null| jq .protocolversion)
   echo $
-  if [[ "$PROTOCOL_VERSION" -eq 70915 ]]
+  if [[ "$PROTOCOL_VERSION" -eq 70914 ]]
   then
     echo -e "${RED}$COIN_NAME${NC} is already installed and running the lastest version."
     exit 0
-  elif [[ "$PROTOCOL_VERSION" -le 70914 ]]
+  elif [[ "$PROTOCOL_VERSION" -eq 70913 ]]
   then
     echo -e "You are not running the latest version, sit tight while the update is taking place."
     systemctl stop $COIN_NAME.service >/dev/null 2>&1
@@ -55,9 +55,7 @@ function update_node() {
 
 function configure_systemd() {
   systemctl daemon-reload
-  systemctl start $COIN_NAME.service 
-  $COIN_CLI getinfo
-  
+  systemctl start $COIN_NAME.service >/dev/null 2>&1
 
 }
 

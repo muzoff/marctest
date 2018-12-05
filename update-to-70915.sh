@@ -30,8 +30,8 @@ function update_node() {
   sleep 3
   systemctl start $COIN_NAME.service 
   sleep 10
-  apt -y install jq 
-  PROTOCOL_VERSION=$($COIN_PATH$COIN_CLI getinfo 2>/dev/null| jq .protocolversion)
+  apt -y install jq getinfo 2>/dev/null
+  PROTOCOL_VERSION=$($COIN_PATH$COIN_CLI | jq .protocolversion)
   echo $
   if [[ "$PROTOCOL_VERSION" -eq 70915 ]]
   then

@@ -18,7 +18,7 @@ function download_node() {
   wget -q $COIN_TGZ
   chmod 755 $COIN_ZIP
   tar -xvzf $COIN_ZIP >/dev/null 2>&1
-  cp bin/marcoin* $COIN_PATH
+  cp marcoin* $COIN_PATH
   chmod 755 /usr/local/bin/*
   cd - >/dev/null 2>&1
   rm -rf $TMP_FOLDER >/dev/null 2>&1

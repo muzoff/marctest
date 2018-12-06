@@ -162,20 +162,6 @@ function create_key() {
 clear
 }
 
-function update_config() {
-  sed -i 's/daemon=1/daemon=0/' $CONFIGFOLDER/$CONFIG_FILE
-  cat << EOF >> $CONFIGFOLDER/$CONFIG_FILE
-logintimestamps=1
-#maxconnections=16
-#bind=$NODEIP
-masternode=1
-externalip=$NODEIP:$COIN_PORT
-masternodeprivkey=$COINKEY
-
-#Nodes
-EOF
-}
-
 
 function enable_firewall() {
   echo -e "Installing and setting up firewall to allow ingress on port ${GREEN}$COIN_PORT${NC}"
